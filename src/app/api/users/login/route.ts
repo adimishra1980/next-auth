@@ -11,6 +11,13 @@ export async function POST(request: NextRequest) {
     const reqBody = await request.json();
     const { email, password } = reqBody;
 
+    if (!email || !password) {
+      return NextResponse.json(
+        { message: "Email and password are required", success: false },
+        { status: 400 },
+      );
+    }
+
     // check if user exists
     const user = await User.findOne({ email });
     if (!user) {
@@ -53,7 +60,7 @@ export async function POST(request: NextRequest) {
       maxAge: 60 * 60 * 24, // 1 day
     });
 
-    return response
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
