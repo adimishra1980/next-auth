@@ -1,16 +1,52 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 const LoginPage = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const onLogin = async () => {};
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await axios.post("/api/users/login", user);
+      console.log("response:", response);
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        router.push("/profile");
+      }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.error ||
+          "Something went wrong. Please try again.";
+
+        toast.error(message);
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+
+      console.log("error: ", error);
+    } finally {
+      setLoading(false);
+    }
+
+    setUser({
+      email: "",
+      password: "",
+    });
+  };
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center p-24 bg-[#131313]">
@@ -18,7 +54,6 @@ const LoginPage = () => {
         <h1 className="m-auto text-2xl font-semibold">Sign In</h1>
 
         <form className="flex flex-col gap-6" onSubmit={onLogin}>
-          
           <div className="flex flex-col gap-2">
             <label htmlFor="email">Email</label>
             <input
@@ -48,21 +83,25 @@ const LoginPage = () => {
           <button
             type="submit"
             className="border-none outline-none px-3.5 py-3 rounded-md bg-[#d62d5f] text-antiquewhite hover:bg-[#b92557] active:scale-95 transition-all duration-300 cursor-pointer font-semibold"
+            disabled={loading}
           >
-            {/* {loading ? (
+            {loading ? (
               <>
-                <LoaderCircle className="loader" />
+                <div className=" flex justify-center items-center">
+                  <LoaderCircle className="animate-spin" />
+                </div>
               </>
             ) : (
-              "Register"
-            )} */}
-            Login
+              "Login"
+            )}
           </button>
         </form>
 
-
         <p className="m-auto text-[#a19b9b]">
-          Already have an account? <Link href="/signup" className="text-[#d62d5f] font-bold">Sign Up</Link>
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="text-[#d62d5f] font-bold">
+            Sign Up
+          </Link>
         </p>
       </div>
     </main>
