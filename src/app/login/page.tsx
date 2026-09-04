@@ -20,7 +20,6 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post("/api/users/login", user);
-      console.log("response:", response);
 
       if (response.data.success) {
         toast.success(response.data.message);
