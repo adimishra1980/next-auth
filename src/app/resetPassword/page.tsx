@@ -1,15 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import Link from "next/link";
 
 const ResetPasswordPage = () => {
-  const params = useSearchParams();
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -40,7 +38,7 @@ const ResetPasswordPage = () => {
       });
       toast.success("Password reset successful! You can now login.");
       router.push("/login");
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const message =
           error.response?.data?.error ||
