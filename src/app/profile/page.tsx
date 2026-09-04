@@ -87,7 +87,9 @@ const ProfilePage = () => {
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        toast.error(err.response?.data?.error || "Logout failed. Please try again.");
+        toast.error(
+          err.response?.data?.error || "Logout failed. Please try again.",
+        );
       } else {
         toast.error("Something went wrong during logout.");
       }
@@ -151,11 +153,6 @@ const ProfilePage = () => {
           </Link>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Active Session
-            </div>
-
             <button
               onClick={logout}
               disabled={loggingOut}
@@ -191,7 +188,9 @@ const ProfilePage = () => {
               <AlertCircle className="w-7 h-7" />
             </div>
             <div className="flex flex-col gap-1">
-              <h2 className="text-xl font-bold text-white">Profile Unavailable</h2>
+              <h2 className="text-xl font-bold text-white">
+                Profile Unavailable
+              </h2>
               <p className="text-sm text-neutral-400">{error}</p>
             </div>
             <div className="flex gap-3 mt-2">
@@ -228,7 +227,11 @@ const ProfilePage = () => {
                       className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-[#121217] ${
                         user.isVerified ? "bg-emerald-500" : "bg-amber-500"
                       } flex items-center justify-center`}
-                      title={user.isVerified ? "Verified Account" : "Unverified Account"}
+                      title={
+                        user.isVerified
+                          ? "Verified Account"
+                          : "Unverified Account"
+                      }
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-white" />
                     </div>
@@ -269,8 +272,15 @@ const ProfilePage = () => {
                     {/* ID Chip */}
                     <div className="mt-1 inline-flex items-center gap-2 text-xs font-mono text-neutral-300 bg-white/5 border border-white/10 rounded-lg px-2.5 py-1 w-fit">
                       <span className="text-neutral-500">ID:</span>
-                      <span className="truncate max-w-40 sm:max-w-none">{user._id}</span>
-                      <CopyButton text={user._id} label="" iconOnly successMessage="User ID copied!" />
+                      <span className="truncate max-w-40 sm:max-w-none">
+                        {user._id}
+                      </span>
+                      <CopyButton
+                        text={user._id}
+                        label=""
+                        iconOnly
+                        successMessage="User ID copied!"
+                      />
                     </div>
                   </div>
                 </div>
@@ -315,7 +325,9 @@ const ProfilePage = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-lg font-bold text-white">Account Details</h2>
+                    <h2 className="text-lg font-bold text-white">
+                      Account Details
+                    </h2>
                     <p className="text-xs text-neutral-400">
                       Personal credentials and identifiers
                     </p>
@@ -373,7 +385,9 @@ const ProfilePage = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-lg font-bold text-white">Authentication</h2>
+                    <h2 className="text-lg font-bold text-white">
+                      Authentication
+                    </h2>
                     <p className="text-xs text-neutral-400">
                       Security protocol & token session
                     </p>
@@ -383,7 +397,9 @@ const ProfilePage = () => {
                     <div className="flex items-center justify-between bg-white/3 p-3 rounded-xl border border-white/5">
                       <div className="flex items-center gap-2">
                         <KeyRound className="w-4 h-4 text-purple-400" />
-                        <span className="text-xs text-neutral-300 font-medium">Session Token</span>
+                        <span className="text-xs text-neutral-300 font-medium">
+                          Session Token
+                        </span>
                       </div>
                       <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                         Active (HTTP-Only)
@@ -393,7 +409,9 @@ const ProfilePage = () => {
                     <div className="flex items-center justify-between bg-white/3 p-3 rounded-xl border border-white/5">
                       <div className="flex items-center gap-2">
                         <Shield className="w-4 h-4 text-purple-400" />
-                        <span className="text-xs text-neutral-300 font-medium">Password</span>
+                        <span className="text-xs text-neutral-300 font-medium">
+                          Password
+                        </span>
                       </div>
                       <span className="text-xs font-semibold text-neutral-300 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
                         Bcrypt Encrypted
@@ -403,7 +421,9 @@ const ProfilePage = () => {
                     <div className="flex items-center justify-between bg-white/3 p-3 rounded-xl border border-white/5">
                       <div className="flex items-center gap-2">
                         <BadgeCheck className="w-4 h-4 text-purple-400" />
-                        <span className="text-xs text-neutral-300 font-medium">Verification</span>
+                        <span className="text-xs text-neutral-300 font-medium">
+                          Verification
+                        </span>
                       </div>
                       <span
                         className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${
@@ -412,7 +432,9 @@ const ProfilePage = () => {
                             : "text-amber-400 bg-amber-500/10 border-amber-500/20"
                         }`}
                       >
-                        {user.isVerified ? "Email Verified" : "Pending Verification"}
+                        {user.isVerified
+                          ? "Email Verified"
+                          : "Pending Verification"}
                       </span>
                     </div>
                   </div>
@@ -437,7 +459,9 @@ const ProfilePage = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-lg font-bold text-white">Public ID Pass</h2>
+                    <h2 className="text-lg font-bold text-white">
+                      Public ID Pass
+                    </h2>
                     <p className="text-xs text-neutral-400">
                       Shareable digital identity card
                     </p>
@@ -445,13 +469,16 @@ const ProfilePage = () => {
 
                   <div className="bg-linear-to-br from-white/4 to-white/1 p-4 rounded-2xl border border-white/5 flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-white">Digital Pass</span>
+                      <span className="text-xs font-semibold text-white">
+                        Digital Pass
+                      </span>
                       <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#d62d5f]/20 text-[#d62d5f] border border-[#d62d5f]/30">
                         Live
                       </span>
                     </div>
                     <p className="text-xs text-neutral-400 leading-relaxed">
-                      Your unique profile has a dedicated public pass accessible via your assigned ID.
+                      Your unique profile has a dedicated public pass accessible
+                      via your assigned ID.
                     </p>
                     <Link
                       href={`/profile/${user._id}`}
@@ -464,7 +491,10 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-neutral-400">
-                  <Link href="/" className="hover:text-white transition flex items-center gap-1">
+                  <Link
+                    href="/"
+                    className="hover:text-white transition flex items-center gap-1"
+                  >
                     ← Back to Home
                   </Link>
                   <span className="font-mono text-neutral-500 text-[11px]">

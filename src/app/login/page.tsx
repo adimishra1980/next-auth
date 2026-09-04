@@ -96,6 +96,13 @@ const LoginPage = () => {
           </button>
         </form>
 
+        <Link
+          href="/forgotPassword"
+          className="text-[#d62d5f] text-sm font-bold m-auto"
+        >
+          Forgot Password
+        </Link>
+
         <p className="m-auto text-[#a19b9b]">
           Don&apos;t have an account?{" "}
           <Link href="/signup" className="text-[#d62d5f] font-bold">
